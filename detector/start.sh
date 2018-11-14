@@ -1,0 +1,1 @@
+node_path=../../data/node1 node ./server.js

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Controller Manager</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/glyphicons/css/glyphicons.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+
+    <link href="vendor/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+    <link href="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="vendor/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css?" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" title="Назад"><i class="fa fa-home font-weight-bold btn btn-success"></i></a>
+        <a class="navbar-brand" href="#"><b><i class="fa fa-lock font-weight-bold"></i> eVision Control. Guard</b></a>
+    </nav>
+    <div class="content-wrapper bg-dark">
+        <div class="container-fluid tab-content">
+            <div class="card" id="rulesTable">
+                <div class="card-header font-weight-bold">
+                    <i class="fa fa-clock-o font-weight-bold"></i> Правила режима работы контроллера доступа
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <div id="toolbar">
+                            <button class="addRec btn btn-success btn-sm" title="Добавить правило">
+					<i class="glyphicon glyphicon-plus"></i>
+			        </button>
+                        </div>
+
+                        <table class="table-striped" id="rulesTbl" data-toolbar="#toolbar" data-id-field="id" data-editable-emptytext="" data-sort-name="createDate" data-sort-order="desc" data-locale="ru-RU" data-search="true" data-show-refresh="true" data-pagination="true" data-cache="false">
+                            <thead>
+                                <tr>
+                                    <!--th data-field="createDate" data-sortable="true" data-formatter="dateFormat" class="text-center">Дата создания</th-->
+                                    <th data-field="status" data-sortable="true" data-formatter="statusFormat" class="text-center">Статус</th>
+                                    <th data-field="adtFrom" data-sortable="true" class="text-center">Время действия с</th>
+                                    <th data-field="adtTo" data-sortable="true" class="text-center">Время действия по</th>
+                                    <th data-field="days" data-sortable="true" data-formatter="daysFormat" data-editable="true" class="text-center">Дни недели</th>
+                                    <th data-field="mode" data-sortable="true" data-editable="true" data-formatter="modeFormat" class="text-center">Режим работы</th>
+                                    <th data-field="action" data-formatter=tableActions></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                    <!--div class="card-footer small text-muted">Обновлено сегодня в 11:59</div-->
+                </div>
+            </div>
+            <div class="card" id="rulesTable">
+                <div class="card-header font-weight-bold">
+                    <i class="fa fa-clock-o font-weight-bold"></i> Даты исключения
+                </div>
+                <div class="card-body">
+                    <!--div class="row"-->
+                    <div class="form-group">
+
+                        <!--label><b>Исключения:</b></label-->
+                        <button class="btn btn-success btn-sm addHoliday" title="Добавить дату">
+					<i class="glyphicon glyphicon-plus"></i>
+			</button>
+                    </div>
+                    <!--/div-->
+                    <div id="holidays" class="form-group row"></div>
+                </div>
+            </div>
+            <!-- /.container-fluid-->
+            <!-- /.content-wrapper-->
+            <footer class="sticky-footer">
+                <div class="container">
+                    <div class="text-center text-light bg-dark">
+                        <small>Copyright © Digt-Telecom 2018</small>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- Remove Record Modal-->
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="removeModalLabel">Удалить сообщение?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Выберите "Удалить", если вы готовы удалить сообщение</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger removeBtn" type="button">Удалить</button>
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Record Modal-->
+            <div class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="editRecordModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editRecordModalLabel">Редактирование записи</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editRecordForm" role="form" data-toggle="validator">
+                                <input name="id" type="hidden"></input>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="rule">Время действия с </label>
+                                            <div class='datetimepicker input-group time'>
+                                                <input type='text' class="form-control" name='adtFrom' />
+                                                <span class="input-group-addon">
+                                        	<span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="rule">по </label>
+                                            <div class='datetimepicker input-group time'>
+                                                <input type='text' class="form-control" name='adtTo' />
+                                                <span class="input-group-addon">
+                                        	<span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Дни недели</label>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_1">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Пн</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_2">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Вт</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_3">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Ср</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_4">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Чт</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_5">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Пт</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_6">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Сб</span>
+                                 </label>
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="day_0">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label">Вс</span>
+                                 </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Режим работы</label>
+                                    <div class='input-group'>
+                                        <select name="mode" class="form-control required">
+				  </select>
+                                        <!--span id="userRefreshBtn" class="input-group-addon" title="Обновить">
+                                        <span class="glyphicon glyphicon-refresh"></span>
+                                    </span-->
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label"> 
+                                      <input type="checkbox" class="form-check-input checkbox" name="status">
+                    		    <span class="checkbox-custom"></span>
+                    		    <span class="label" style="padding-left: 5px;">Активный</span>
+                                 </label>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
+                            <button class="btn btn-success form-submit" type="button">Применить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+            <script src="vendor/jquery-ui/datepicker-ru.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="vendor/bootstrap-datetimepicker/moment-with-locales.js"></script>
+            <script src="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+            <!-- Page level plugin JavaScript-->
+            <script src="vendor/bootstrap-table/bootstrap-table.js"></script>
+            <!--script src="vendor/bootstrap-table/bootstable.js"></script-->
+            <script src="vendor/bootstrap-table/jquery.tabledit.js"></script>
+            <script src="vendor/bootstrap-table/locale/bootstrap-table-ru-RU.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin.js"></script>
+            <!-- Custom scripts for this page-->
+            <script src="js/sb-admin-datatables.js?a=4"></script>
+        </div>
+</body>
+
+</html>

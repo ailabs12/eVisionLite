@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>eVision history</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/glyphicons/css/glyphicons.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+
+    <link href="vendor/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+    <link href="vendor/bootstrap-table-group-by-v2/bootstrap-table-group-by.css" rel="stylesheet">
+
+    <link href="vendor/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            height: 100%;
+    	    overflow-x: hidden; 
+	}
+
+        .center-container {
+            height: 100%;
+            display: table;
+            width: 100%;
+            margin: 0;
+	    padding-top: 4px;
+    	    /*padding: 1px;*/
+        }
+
+        .center-row {
+            height: 50%;
+            width: 100%;
+            display: table-row;
+        }
+
+        .center-row>div {
+            /*height:100%; */
+            width: 50%;
+            display: table-cell;
+            border: 1px solid #eee;
+            color: #fff;
+            vertical-align: middle;
+        }
+	.center-row img{
+	    width:100%;
+	    height:calc(50vh - 4px);
+    	    max-height: calc(50vh - 4px);
+    	    max-width: 100%;
+	    background-color: #343a40;
+	    /*object-fit: contain;*/
+	}
+	.center-row span{
+	    padding-left: 10px;
+    	    position: absolute;
+	    color: red;
+            font-weight: bold;
+	}
+
+        img{ cursor: pointer; }
+	#reportsTbl{display:none}
+
+    </style>
+</head>
+
+<body>
+    <!-- Begin page content -->
+    <div class="center-container">
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <div id="toolbar">
+                            <div class="form-inline" role="form">
+                                <div class="col">
+                                    <input type="text" class="datepicker form-control" name="date" />
+                                </div>
+                                <!--div class="col text-center">
+                                    <h2>Отчет</h2>
+                                </div-->
+                                <div class="col">
+                                    <select name="objectType" class="form-control">
+                                        <option value="0">лица и а/м номера</option>
+  					<option value="1">только лица</option>
+					<option value="2">только а/м номера</option>
+				    </select>
+                                </div>
+
+                                <!--div class='input-group date'>
+                                    <input type='text' class="datepicker form-control" name='date'/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div-->
+
+                                <!--div class="input-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label"> 
+                                            <input type="checkbox" class="form-check-input checkbox" name="event">
+                    			    <span class="checkbox-custom"></span>
+                    			    <span class="label" style="padding-left: 5px;">Журнал посещений</span>
+                                          </label>
+                                    </div>
+                                </div-->
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table-striped" id="reportsTbl" 
+				data-toolbar="#toolbar" 
+				data-query-params="queryParams" 
+				data-sort-name="date" 
+				data-sort-order="desc" 
+				data-locale="ru-RU" 
+				data-search="true" 
+				data-show-refresh="true" 
+				data-pagination="true" 
+				data-row-style="histRowStyle" 
+				data-cache="false" 
+				data-show-export="true"
+				data-export-options='{"fileName": "report", "ignoreColumn": [2,3]}'>
+                        <thead>
+                            <tr>
+                                <th data-field="date" data-sortable="true" class="text-center">Дата</th>
+                                <th data-field="source" data-sortable="true" class="text-center" data-formatter="sourceFormat">Источник</th>
+                                <th data-field="image" data-formatter="imgFormatF" class="text-center">Изображение</th>
+                                <th data-field="image" data-formatter="imgFormatH" class="text-center">Фото</th>
+                                <th data-field="id" data-sortable="true" data-formatter="imgFormatType" class="text-center">Тип объекта</th>
+                                <th data-field="id" data-sortable="true" data-formatter="nameFormat" class="text-center">Идентификатор</th>
+                                <!--th data-field="accuracy" data-formatter=accFormat data-sortable="true" class="text-center">Точность</th-->
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="vendor/jquery-ui/datepicker-ru.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/bootstrap-table/bootstrap-table.js"></script>
+    <script src="vendor/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="vendor/bootstrap-table/tableExport.js"></script>
+    <script src="vendor/bootstrap-table-group-by-v2/bootstrap-table-group-by.js"></script>
+    <!--script src="vendor/bootstrap-table/bootstable.js"></script-->
+    <script src="vendor/bootstrap-table/locale/bootstrap-table-ru-RU.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-reports.js"></script>
+</body>
+
+</html>

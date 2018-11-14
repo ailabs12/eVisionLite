@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#ubuntu 16.04
+
+sudo su - evision << EOF
+pm2 kill
+EOF
+
+while true; do
+    read -p "Полное удаление eVision Control Lite (удаление видеозаписей и журналов) (y\n)?: " yn
+    case $yn in
+        [Yy]* )	sudo deluser --force --remove-home evision;
+		sudo rm -fR /home/evision;
+		break;;
+        [Nn]* ) sudo deluser --force evision;
+		sudo rm -fR /home/evision/evision/detector;
+		sudo rm -fR /home/evision/evision/node_modules;
+		sudo rm -fR /home/evision/evision/portal;
+		sudo rm -f /home/evision/evision/app.js;
+		sudo rm -f /home/evision/evision/app.json;
+		sudo rm -f /home/evision/evision/package-lock.json;
+		sudo rm -f /home/evision/evision/package.json;
+		sudo rm -f /home/evision/evision/settings.json;
+		sudo rm -fR /home/evision/.npm;
+		sudo rm -fR /home/evision/.nvm;
+		sudo rm -fR /home/evision/.pm2;
+		break;;
+    esac
+    break;
+done

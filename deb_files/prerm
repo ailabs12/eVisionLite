@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#ubuntu 16.04
+sudo su - evision << EOF
+pm2 stop all
+pm2 delete all
+EOF
+

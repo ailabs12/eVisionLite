@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>test Audio</title>
+</head>
+<body>
+<script>
+var audio = new Audio();
+    audio.autoplay = true;
+    audio.addEventListener("loadeddata", function() {
+        console.log('source loaded...');
+ 	audio.play(); 
+     }, true);
+
+function yandexSpeak(text, cb) {
+    function onEnded(){
+         console.log("ended");
+      if (cb) cb();
+      playing=false;
+      audio.removeEventListener("ended", onEnded)
+    }
+    audio.addEventListener("ended", onEnded);	
+    audio.src = 'https://tts.voicetech.yandex.net/tts?speaker=omazh&text='+text+'&_='+new Date().getTime();
+}
+
+setTimeout(function(){yandexSpeak('Добрый день')},1000);
+
+</script>
+</body>
+</html>

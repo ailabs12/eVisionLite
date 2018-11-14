@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>eVision preview</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden; 
+    }
+
+        .center-container {
+            height: 100%;
+            display: table;
+            width: 100%;
+            margin: 0;
+           padding-top: 4px;
+            /*padding: 1px;*/
+        }
+
+        .center-row {
+            height: 50%;
+            width: 100%;
+            display: table-row;
+        }
+
+        .center-row>div {
+            /*height:100%; */
+            width: 50%;
+            display: table-cell;
+            border: 1px solid #eee;
+            color: #fff;
+            vertical-align: middle;
+        }
+        .center-row img{
+            width:100%;
+            height:calc(50vh - 4px);
+                max-height: calc(50vh - 4px);
+                max-width: 100%;
+            background-color: #343a40;
+            /*object-fit: contain;*/
+        }
+        .center-row span{
+            padding-left: 10px;
+                position: absolute;
+            color: red;
+                font-weight: bold;
+        }
+
+        .center-row2 {
+            height: 33%;
+            width: 100%;
+            display: table-row;
+        }
+
+        .center-row2>div {
+            height:33%;
+            width: 33%;
+            display: table-cell;
+            /*border: 0.25px solid #eee;*/
+            color: #fff;
+            vertical-align: middle;
+        }
+        .center-row2 img{
+            width:100%;
+            height:calc(33.3vh - 2.33px);
+                max-height: calc(33vh - 2.33px);
+                max-width: 100%;
+            background-color: #343a40;
+            /*object-fit: contain;*/
+        }
+        .center-row2 span{
+            padding-left: 10px;
+                position: absolute;
+            color: red;
+                font-weight: bold;
+        }
+
+        .center-row3{
+            height: 33%;
+            width: 100%;
+            display: table-row;
+        }
+
+        .center-row3>div {
+            height:33%;
+            width: 33%;
+            display: table-cell;
+            /*border: 0.25px solid #eee;*/
+            color: #fff;
+            vertical-align: middle;
+        }
+        .center-row3 img{
+            width:100%;
+            height:calc(25vh - 2.33px);
+                max-height: calc(25vh - 2.33px);
+                max-width: 100%;
+            background-color: #343a40;
+            /*object-fit: contain;*/
+        }
+        .center-row3 span{
+            padding-left: 10px;
+                position: absolute;
+            color: red;
+                font-weight: bold;
+        }
+
+        img{ cursor: pointer; }
+
+    </style>
+</head>
+
+<body>
+    <!-- Begin page content -->
+    <div class="center-container" id="cams4">
+        <div class="center-row">
+            <div class="col-xs-6 text-center"><span id="cam14span">Камера 1</span><img id="cam14"/></div>
+            <div class="col-xs-6 text-center"><span id="cam24span">Камера 2</span><img id="cam24"/></div>
+        </div>
+        <div class="center-row">
+            <div class="col-xs-6 text-center"><span id="cam34span">Камера 3</span><img id="cam34"/></div>
+            <div class="col-xs-6 text-center"><span id="cam44span">Камера 4</span><img id="cam44"/></div>
+        </div>
+    </div>
+
+    <div class="center-container" id="cams9">
+        <div class="center-row2">
+            <div class="col-xs-4 text-center"><span id="cam19span">Камера 1</span><img id="cam19"/></div>
+            <div class="col-xs-4 text-center"><span id="cam29span">Камера 2</span><img id="cam29"/></div>
+            <div class="col-xs-4 text-center"><span id="cam39span">Камера 3</span><img id="cam39"/></div>
+        </div>
+        <div class="center-row2">
+            <div class="col-xs-4 text-center"><span id="cam49span">Камера 4</span><img id="cam49"/></div>
+            <div class="col-xs-4 text-center"><span id="cam59span">Камера 5</span><img id="cam59"/></div>
+            <div class="col-xs-4 text-center"><span id="cam69span">Камера 6</span><img id="cam69"/></div>
+        </div>
+        <div class="center-row2">
+            <div class="col-xs-4 text-center"><span id="cam79span">Камера 7</span><img id="cam79"/></div>
+            <div class="col-xs-4 text-center"><span id="cam89span">Камера 8</span><img id="cam89"/></div>
+            <div class="col-xs-4 text-center"><span id="cam99span">Камера 9</span><img id="cam99"/></div>
+        </div>
+    </div>
+        <div class="center-container" id="cams12">
+        <div class="center-row3">
+            <div class="col-xs-4 text-center"><span id="cam112span">Камера 1</span><img id="cam112"/></div>
+            <div class="col-xs-4 text-center"><span id="cam212span">Камера 2</span><img id="cam212"/></div>
+            <div class="col-xs-4 text-center"><span id="cam312span">Камера 3</span><img id="cam312"/></div>
+        </div>
+        <div class="center-row3">
+            <div class="col-xs-4 text-center"><span id="cam412span">Камера 4</span><img id="cam412"/></div>
+            <div class="col-xs-4 text-center"><span id="cam512span">Камера 5</span><img id="cam512"/></div>
+            <div class="col-xs-4 text-center"><span id="cam612span">Камера 6</span><img id="cam612"/></div>
+        </div>
+        <div class="center-row3">
+            <div class="col-xs-4 text-center"><span id="cam712span">Камера 7</span><img id="cam712"/></div>
+            <div class="col-xs-4 text-center"><span id="cam812span">Камера 8</span><img id="cam812"/></div>
+            <div class="col-xs-4 text-center"><span id="cam912span">Камера 9</span><img id="cam912"/></div>
+        </div>
+        <div class="center-row3">
+            <div class="col-xs-4 text-center"><span id="cam1012span">Камера 10</span><img id="cam1012"/></div>
+            <div class="col-xs-4 text-center"><span id="cam1112span">Камера 11</span><img id="cam1112"/></div>
+            <div class="col-xs-4 text-center"><span id="cam1212span">Камера 12</span><img id="cam1212"/></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/sb-preview.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>eVision Control 2.1 Lite</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/glyphicons/css/glyphicons.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav bg-dark" id="page-top">
+    <!-- Navigation  mr-lg-2 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <span class="navbar-brand"><img src="images/control.png"></span><span id="appName" class="navbar-brand"><b>2.1 Lite</b></span>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <div class="btn-group _btn-group-sm">
+                    <button id="removeCam" class="navbar-brand btn btn-danger" title="Удалить камеру"><i class="fa fa-trash"></i></button>
+                    <span id="metaCam" class="navbar-brand btn btn-secondary"><i class="fa fa-video-camera"></i></span>
+                    <button id="addCam" class="navbar-brand btn btn-success " title="Добавить камеру"><i class="fa fa-plus"></i></button>
+                </div>
+            </li>
+        </ul>
+		<ul class="_ml-auto" style="margin-bottom: 0; padding-right: 35px">
+			<li data-toggle="tooltip" class="text-success" id="cpuUsage" style="font-size: 0.85em; list-style-type: none; line-height: 1.2"></li>
+			<li data-toggle="tooltip" class="text-success" id="memUsage" style="font-size: 0.85em;  list-style-type: none; line-height: 1.2"></li>
+			<li data-toggle="tooltip" class="text-success" id="driveUsage" style="font-size: 0.85em;  list-style-type: none; line-height: 1.2"></li>
+		</ul>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+           	<ul class="navbar-nav camNav _ml-auto"></ul>
+                <!--ul class="navbar-nav camReport ml-auto">
+                    <li class="nav-item">
+                        <button class="camBtn navbar-brand mr-lg-2 btn btn-outline-primary" title="Отчеты">
+                                <i class="fa fa-bar-chart"></i>
+                        </button>
+                    </li>
+                </ul-->
+        <!--/div>
+        <div class="collapse navbar-collapse" id="navbarResponsive2"-->
+            <ul class="navbar-nav ml-auto camPrewiev">
+                    <li class="nav-item camReport">
+                        <button class="camBtn navbar-brand mr-lg-2 btn btn-outline-primary" title="Отчеты">
+                                <i class="fa fa-bar-chart"></i>
+                        </button>
+                    </li>
+                <li class="nav-item">
+                    <button class="navbar-brand mr-lg-2 btn btn-outline-primary" title="Настройки авторизации" id="authSettings">
+                        <i class="fa fa-user-circle"></i>
+                    </button>
+                <li class="nav-item">
+                    <form action="/logout">
+                        <button class="navbar-brand mr-lg-2 btn btn-outline-primary pull-right" title="Выйти">
+                            <i class="fa fa-sign-out"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>            
+        </div>
+    </nav>
+    <div class="content-wrapper" style="padding:0px">
+        <div class="container-fluid tab-content" style="padding:0px">
+                <div class="card card-block" id="videoContainer" style="border:0px">
+                    <iframe allow="camera" id="nodeFrame" class="card-img-top img-fluid h-100" alt="" style="border: none"></iframe>
+                </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+    </a>
+
+    <div class="modal fade" id="addCamModal" tabindex="-1" role="dialog" aria-labelledby="addCamModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCamModalLabel">Добавление нового устройства</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCamForm" role="form" data-toggle="validator">
+                        <div class="form-group">
+                            <label for="inputDevice">Устройство</label>
+                            <select id="inputDevice" class="form-control">
+                                <option disabled selected>-- Выберите устройство --</option>
+                                <option>Beward</option>
+                                <option>Dahua</option>
+                                <option>ТЕТА</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="inputDeviceNameDiv">
+                            <label for="inputDeviceName">Имя устройства</label>
+                            <input type="text" class="form-control" id="inputDeviceName" placeholder="Введите имя устройства">
+                        </div>
+                        <div class="form-group" id="inputIPAdressDeviceDiv">
+                            <label for="inputIPAdressDevice">IP-адрес устройства</label>
+                            <input type="text" class="form-control" id="inputIPAdressDevice" placeholder="Введите IP-адрес устройства" required>
+                        </div>
+                        <div class="form-group" id="inputLoginDeviceDiv">
+                            <label for="inputLoginDevice">Логин</label>
+                            <input type="text" class="form-control" id="inputLoginDevice" placeholder="Введите логин">
+                        </div>
+                        <div class="form-group" id="inputPasswordDeviceDiv">
+                            <label for="inputPasswordDevice">Пароль</label>
+                            <input type="text" class="form-control" id="inputPasswordDevice" placeholder="Введите пароль">
+                        </div>
+                        <!-- <div class="form-group" id="inputObjectTypeDiv">
+                            <div class="form">
+                                <label>Режим видеоаналитики:</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input checked type="radio" class="form-check-input" name="optradio" value='0'>Лицо
+                                </label>
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optradio" value='1'>Автомобильные номера
+                                </label>
+                            </div>                       
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
+                    <button class="btn btn-success form-submit" type="submit" id='addCamM'>Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="authSettingsModal" tabindex="-1" role="dialog" aria-labelledby="authSettingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authSettingsModalLabel">Изменение настроек авторизации</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="authSettingsForm" role="form" data-toggle="validator">
+                        <div class="form-group" id="inputNewLoginDiv">
+                            <label for="inputNewLogin">Новый логин</label>
+                            <input type="text" class="form-control" id="inputNewLogin" placeholder="Введите новый логин" required>
+                        </div>
+                        <div class="form-group" id="inputNewPasswordDiv">
+                            <label for="inputNewPassword">Новый пароль</label>
+                            <input type="text" class="form-control" id="inputNewPassword" placeholder="Введите новый пароль" required>
+                        </div>
+                        <div class="form-group" id="inputNewPasswordDiv">
+                            <label for="inputNewPassword">Старый пароль</label>
+                            <input type="text" class="form-control" id="inputOldPassword" placeholder="Введите старый пароль" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
+                    <button class="btn btn-success form-submit" type="submit" id='changeSettings'>Применить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.js"></script>
+	<script src="js/sysinfo.js"></script>
+    </div>
+</body>
+
+</html>

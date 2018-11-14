@@ -1,0 +1,7 @@
+Package: evision-control-lite
+Version: 2.1-1 
+Section: misc
+Architecture: all
+Maintainer: DIGT <support@evision.tech>
+Depends: ffmpeg (>= 7:2.8.14-0ubuntu0.16.04.1), sox (>= 14.4.1-5), iptables-persistent (>= 1.0.4), build-essential (>= 12.1ubuntu2), g++ (>= 4:5.3.1-1ubuntu1), libcairo2-dev (>= 1.14.6-1), libjpeg-dev (>=8c-2ubuntu8), libpango1.0-dev (>= 1.38.1-1), libgif-dev (>= 5.1.2-0.2), libssl-dev (>= 1.0.2g-1ubuntu4.13), libgtk2.0-dev (>=2.24.30-1ubuntu1), libavcodec-dev (>=7:2.8.15-0ubuntu0.16.04.1), libavformat-dev (>=7:2.8.15-0ubuntu0.16.04.1), libswscale-dev (>=7:2.8.15-0ubuntu0.16.04.1), libopencv-dev (>=2.4.9.1+dfsg-1.5ubuntu1.1), libtesseract-dev (>=3.04.01-4), libleptonica-dev (>=1.73-1), liblog4cplus-dev (>=1.1.2-3.1), libcurl4-openssl-dev (>=7.47.0)
+Description: eVision Control Lite 2.1 - система распознавания и идентификации лиц с нескольких видеопотоков.

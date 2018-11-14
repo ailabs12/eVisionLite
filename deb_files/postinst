@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+#ubuntu 16.04
+sudo su - evision << EOF
+#Starting
+pm2 stop all
+pm2 delete all
+cd ~/evision
+pm2 start ./app.js --name eVision-Lite
+sudo env PATH=$PATH:/home/evision/.nvm/versions/node/v8.11.4/bin pm2 startup systemd -u evision --hp /home/evision
+pm2 save
+sudo chown evision:evision ~/evision/ -R
+EOF
+
+
