@@ -117,8 +117,7 @@ var Faces = require('./lib/face');
 var onvifRelay = require('./lib/onvifRelay');
 var TrustedID = require('./lib/trustedID');
 var request = require('request');
-
-
+var objectDetector = require('./lib/objectDetector');
 process.on('exit', function() {
     if (rtsp)
         rtsp.stop();
@@ -387,7 +386,6 @@ function start(obj) {
     };
 
     function faceDetect(cb) {
-        //console.time('faceDetect');
         var frame = frameData;
         frameUpdated = false;
         frameProcessed = false;
@@ -462,6 +460,8 @@ function start(obj) {
 
         if (_lic && params.enableObjectDetect && params.enableTrustedID)
             TrustedID(frame, params, onResult);
+        else if (params.enableObjectDetect)
+            objectDetector(frame, params, onResult);
         else
             sendFrame(frame);
     }
