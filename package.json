@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "canvas": "^2.0.0-alpha.12",
+    "canvas": "^2.1.0",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "enfsensure": "^1.0.0",
